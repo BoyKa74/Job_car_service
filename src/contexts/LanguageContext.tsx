@@ -202,6 +202,18 @@ const translations: Record<LanguageType, Record<string, string>> = {
     'footer.address': '123 Đường Lê Lợi, Quận 1, TP.HCM',
     'footer.working.hours': 'Thứ 2 - Thứ 7: 8:00 - 18:00',
     'footer.copyright': 'Đã đăng ký bản quyền.',
+
+    // Icons
+    'icon.tools': 'Công cụ',
+    'icon.gears': 'Bánh răng',
+    'icon.car': 'Xe hơi',
+    'icon.oil': 'Dầu',
+    'icon.electric': 'Điện',
+    'icon.gauge': 'Đồng hồ',
+    'icon.battery': 'Ắc quy',
+    'icon.repair': 'Sửa chữa',
+    'icon.ac': 'Điều hòa',
+    'icon.tire': 'Lốp xe',
   },
   en: {
     // Navbar
@@ -393,6 +405,18 @@ const translations: Record<LanguageType, Record<string, string>> = {
     'footer.address': '123 Le Loi Street, District 1, HCMC',
     'footer.working.hours': 'Monday - Saturday: 8:00 AM - 6:00 PM',
     'footer.copyright': 'All rights reserved.',
+
+    // Icons
+    'icon.tools': 'Tools',
+    'icon.gears': 'Gears',
+    'icon.car': 'Car',
+    'icon.oil': 'Oil',
+    'icon.electric': 'Electric',
+    'icon.gauge': 'Gauge',
+    'icon.battery': 'Battery',
+    'icon.repair': 'Repair',
+    'icon.ac': 'Air Conditioning',
+    'icon.tire': 'Tire',
   }
 };
 
