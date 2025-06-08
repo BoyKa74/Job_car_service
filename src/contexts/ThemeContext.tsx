@@ -10,17 +10,17 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Lấy theme từ localStorage hoặc mặc định là 'light'
+  // Get theme from localStorage or default to 'light'
   const [theme, setTheme] = useState<ThemeType>(() => {
     const savedTheme = localStorage.getItem('theme');
     return (savedTheme as ThemeType) || 'light';
   });
 
-  // Cập nhật theme trong localStorage khi thay đổi
+  // Update theme in localStorage when changed
   useEffect(() => {
     localStorage.setItem('theme', theme);
     
-    // Thêm hoặc xóa class 'dark-theme' từ body
+    // Add or remove 'dark-theme' class from body
     if (theme === 'dark') {
       document.body.classList.add('dark-theme');
     } else {
@@ -28,7 +28,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, [theme]);
 
-  // Hàm để toggle theme
+  // Function to toggle theme
   const toggleTheme = () => {
     setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
   };
@@ -40,7 +40,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   );
 };
 
-// Custom hook để sử dụng theme
+// Custom hook to use theme
 export const useTheme = (): ThemeContextType => {
   const context = useContext(ThemeContext);
   if (context === undefined) {
