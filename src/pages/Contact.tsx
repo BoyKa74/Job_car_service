@@ -1,15 +1,18 @@
 import React from 'react';
 import ContactForm from '../components/ContactForm';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Contact: React.FC = () => {
+  const { t } = useLanguage();
+  
   return (
     <>
       {/* Header */}
       <section className="bg-primary text-white py-5">
         <div className="container text-center">
-          <h1 className="display-4">Liên hệ với chúng tôi</h1>
+          <h1 className="display-4">{t('contact.us')}</h1>
           <p className="lead">
-            Hãy liên hệ với chúng tôi nếu bạn có bất kỳ câu hỏi hoặc yêu cầu nào
+            {t('contact.description')}
           </p>
         </div>
       </section>
@@ -21,7 +24,7 @@ const Contact: React.FC = () => {
             <div className="col-lg-4 mb-4 mb-lg-0">
               <div className="card border-0 shadow h-100">
                 <div className="card-body p-4">
-                  <h3 className="card-title mb-4">Thông tin liên hệ</h3>
+                  <h3 className="card-title mb-4">{t('contact.info')}</h3>
                   
                   <div className="d-flex mb-4">
                     <div className="flex-shrink-0">
@@ -31,8 +34,8 @@ const Contact: React.FC = () => {
                       </div>
                     </div>
                     <div className="ms-3">
-                      <h5>Địa chỉ</h5>
-                      <p className="text-muted mb-0">123 Đường Lê Lợi, Quận 1, TP.HCM</p>
+                      <h5>{t('address')}</h5>
+                      <p className="text-muted mb-0">{t('footer.address')}</p>
                     </div>
                   </div>
                   
@@ -44,7 +47,7 @@ const Contact: React.FC = () => {
                       </div>
                     </div>
                     <div className="ms-3">
-                      <h5>Điện thoại</h5>
+                      <h5>{t('phone')}</h5>
                       <p className="text-muted mb-0">+84 123 456 789</p>
                     </div>
                   </div>
@@ -57,7 +60,7 @@ const Contact: React.FC = () => {
                       </div>
                     </div>
                     <div className="ms-3">
-                      <h5>Email</h5>
+                      <h5>{t('email')}</h5>
                       <p className="text-muted mb-0">info@autoservice.com</p>
                     </div>
                   </div>
@@ -70,15 +73,15 @@ const Contact: React.FC = () => {
                       </div>
                     </div>
                     <div className="ms-3">
-                      <h5>Giờ làm việc</h5>
-                      <p className="text-muted mb-0">Thứ 2 - Thứ 7: 8:00 - 18:00</p>
-                      <p className="text-muted mb-0">Chủ nhật: Đóng cửa</p>
+                      <h5>{t('working.hours')}</h5>
+                      <p className="text-muted mb-0">{t('footer.working.hours')}</p>
+                      <p className="text-muted mb-0">{t('contact.sunday.closed')}</p>
                     </div>
                   </div>
                   
                   <hr className="my-4" />
                   
-                  <h5>Kết nối với chúng tôi</h5>
+                  <h5>{t('connect.with.us')}</h5>
                   <div className="d-flex gap-3 mt-3">
                     <a href="https://facebook.com" className="text-primary fs-4">
                       <i className="fab fa-facebook-f"></i>

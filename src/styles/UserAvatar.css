@@ -1,0 +1,114 @@
+.user-avatar-container {
+  position: relative;
+  display: inline-block;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.user-avatar:hover {
+  transform: scale(1.05);
+}
+
+.avatar-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 10px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+/* Trong dark theme */
+.dark-theme .avatar-dropdown {
+  background-color: #333;
+  color: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.user-info {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.dark-theme .user-info {
+  border-bottom: 1px solid #555;
+}
+
+.login-register-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-register-links .dropdown-item {
+  text-decoration: none;
+  color: #1e3a8a;
+  text-align: center;
+}
+
+.dark-theme .login-register-links .dropdown-item {
+  color: #4dabf7;
+}
+
+.username {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.role {
+  display: block;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.dark-theme .role {
+  color: #aaa;
+}
+
+.dropdown-item {
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.dropdown-item:hover {
+  background-color: #f5f5f5;
+}
+
+.dark-theme .dropdown-item:hover {
+  background-color: #444;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background-color: #eee;
+  margin: 4px 0;
+}
+
+.dark-theme .dropdown-divider {
+  background-color: #555;
+}
+
+.logout {
+  color: #ff5252;
+}
+
+.dark-theme .logout {
+  color: #ff7070;
+} 
