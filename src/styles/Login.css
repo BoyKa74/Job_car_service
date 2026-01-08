@@ -1,0 +1,179 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 160px); /* Trừ đi chiều cao của navbar và footer */
+  padding: 40px 20px;
+  background-color: #f8f9fa;
+}
+
+.dark-theme .login-container {
+  background-color: #1a202c;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme .login-card {
+  background-color: #2d3748;
+  color: #f8f9fa;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.login-card h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #1e3a8a;
+  font-weight: bold;
+}
+
+.dark-theme .login-card h2 {
+  color: #4dabf7;
+}
+
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.dark-theme .error-message {
+  background-color: rgba(198, 40, 40, 0.2);
+  color: #ef9a9a;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.2s;
+}
+
+.dark-theme .form-group input,
+.dark-theme .form-group select {
+  background-color: #3a4556;
+  border-color: #4a5568;
+  color: #f8f9fa;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #4dabf7;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(77, 171, 247, 0.2);
+}
+
+.login-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #1e3a8a;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.login-button:hover {
+  background-color: #1a237e;
+}
+
+.login-button:disabled {
+  background-color: #90a4ae;
+  cursor: not-allowed;
+}
+
+.dark-theme .login-button {
+  background-color: #4dabf7;
+}
+
+.dark-theme .login-button:hover {
+  background-color: #3b9eeb;
+}
+
+.dark-theme .login-button:disabled {
+  background-color: #546e7a;
+}
+
+.register-link {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.register-link p {
+  font-size: 14px;
+  color: #666;
+}
+
+.register-link a {
+  color: #1e3a8a;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+.dark-theme .register-link p {
+  color: #a0aec0;
+}
+
+.dark-theme .register-link a {
+  color: #4dabf7;
+}
+
+.demo-credentials {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  text-align: center;
+}
+
+.dark-theme .demo-credentials {
+  border-top-color: #4a5568;
+}
+
+.demo-credentials h3 {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+.dark-theme .demo-credentials h3 {
+  color: #a0aec0;
+}
+
+.demo-credentials p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.dark-theme .demo-credentials p {
+  color: #a0aec0;
+} 

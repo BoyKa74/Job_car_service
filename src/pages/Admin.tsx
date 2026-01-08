@@ -1,24 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { getServices, Service } from '../services/api';
+import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
+
+// Define icon options
+const iconOptions = [
+  { value: "fas fa-tools", labelKey: "icon.tools" },
+  { value: "fas fa-cogs", labelKey: "icon.gears" },
+  { value: "fas fa-car", labelKey: "icon.car" },
+  { value: "fas fa-oil-can", labelKey: "icon.oil" },
+  { value: "fas fa-bolt", labelKey: "icon.electric" },
+  { value: "fas fa-tachometer-alt", labelKey: "icon.gauge" },
+  { value: "fas fa-car-battery", labelKey: "icon.battery" },
+  { value: "fas fa-car-crash", labelKey: "icon.repair" },
+  { value: "fas fa-snowflake", labelKey: "icon.ac" },
+  { value: "fas fa-car-side", labelKey: "icon.tire" }
+];
 
 const Admin: React.FC = () => {
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loginForm, setLoginForm] = useState({ username: '', password: '' });
   const [newService, setNewService] = useState<Omit<Service, 'id'>>({
     title: '',
+    titleEn: '',
     description: '',
+    descriptionEn: '',
     icon: 'fas fa-tools',
     price: '',
+    priceEn: ''
   });
   const [editingService, setEditingService] = useState<Service | null>(null);
+  const { t } = useLanguage();
+  const { logout } = useAuth();
 
   useEffect(() => {
-    if (isLoggedIn) {
-      fetchServices();
-    }
-  }, [isLoggedIn]);
+    fetchServices();
+  }, []);
 
   const fetchServices = async () => {
     try {
@@ -29,28 +46,6 @@ const Admin: React.FC = () => {
       console.error('Error fetching services:', error);
       setLoading(false);
     }
-  };
-
-  const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setLoginForm(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Đơn giản hóa đăng nhập (trong thực tế cần xác thực với API)
-    if (loginForm.username === 'admin' && loginForm.password === 'admin123') {
-      setIsLoggedIn(true);
-    } else {
-      alert('Tên đăng nhập hoặc mật khẩu không đúng!');
-    }
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
   };
 
   const handleNewServiceChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -72,9 +67,12 @@ const Admin: React.FC = () => {
     setServices([...services, serviceToAdd]);
     setNewService({
       title: '',
+      titleEn: '',
       description: '',
+      descriptionEn: '',
       icon: 'fas fa-tools',
       price: '',
+      priceEn: ''
     });
   };
 
@@ -107,69 +105,15 @@ const Admin: React.FC = () => {
     setServices(updatedServices);
   };
 
-  if (!isLoggedIn) {
-    return (
-      <section className="section">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-md-6">
-              <div className="card border-0 shadow">
-                <div className="card-body p-4">
-                  <h2 className="card-title text-center mb-4">Đăng nhập quản trị</h2>
-                  <form onSubmit={handleLogin}>
-                    <div className="mb-3">
-                      <label htmlFor="username" className="form-label">Tên đăng nhập</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="username"
-                        name="username"
-                        value={loginForm.username}
-                        onChange={handleLoginChange}
-                        required
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label htmlFor="password" className="form-label">Mật khẩu</label>
-                      <input
-                        type="password"
-                        className="form-control"
-                        id="password"
-                        name="password"
-                        value={loginForm.password}
-                        onChange={handleLoginChange}
-                        required
-                      />
-                    </div>
-                    <div className="d-grid">
-                      <button type="submit" className="btn btn-primary">
-                        Đăng nhập
-                      </button>
-                    </div>
-                    <div className="mt-3 text-center">
-                      <small className="text-muted">
-                        Tên đăng nhập: admin | Mật khẩu: admin123
-                      </small>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   return (
     <>
       {/* Header */}
       <section className="bg-primary text-white py-4">
         <div className="container">
           <div className="d-flex justify-content-between align-items-center">
-            <h1 className="h3 mb-0">Quản lý dịch vụ</h1>
-            <button className="btn btn-outline-light" onClick={handleLogout}>
-              Đăng xuất
+            <h1 className="h3 mb-0">{t('service.management')}</h1>
+            <button className="btn btn-outline-light" onClick={logout}>
+              {t('logout')}
             </button>
           </div>
         </div>
@@ -183,11 +127,11 @@ const Admin: React.FC = () => {
               <div className="card border-0 shadow">
                 <div className="card-body p-4">
                   <h3 className="card-title mb-4">
-                    {editingService ? 'Cập nhật dịch vụ' : 'Thêm dịch vụ mới'}
+                    {editingService ? t('update.service') : t('add.service')}
                   </h3>
                   <form onSubmit={editingService ? handleUpdateService : handleAddService}>
                     <div className="mb-3">
-                      <label htmlFor="title" className="form-label">Tên dịch vụ</label>
+                      <label htmlFor="title" className="form-label">{t('service.name')} ({t('vietnamese')})</label>
                       <input
                         type="text"
                         className="form-control"
@@ -199,7 +143,19 @@ const Admin: React.FC = () => {
                       />
                     </div>
                     <div className="mb-3">
-                      <label htmlFor="description" className="form-label">Mô tả</label>
+                      <label htmlFor="titleEn" className="form-label">{t('service.name')} ({t('english')})</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="titleEn"
+                        name="titleEn"
+                        value={editingService ? editingService.titleEn : newService.titleEn}
+                        onChange={editingService ? handleEditServiceChange : handleNewServiceChange}
+                        required
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label htmlFor="description" className="form-label">{t('description')} ({t('vietnamese')})</label>
                       <textarea
                         className="form-control"
                         id="description"
@@ -211,7 +167,19 @@ const Admin: React.FC = () => {
                       ></textarea>
                     </div>
                     <div className="mb-3">
-                      <label htmlFor="icon" className="form-label">Icon</label>
+                      <label htmlFor="descriptionEn" className="form-label">{t('description')} ({t('english')})</label>
+                      <textarea
+                        className="form-control"
+                        id="descriptionEn"
+                        name="descriptionEn"
+                        rows={3}
+                        value={editingService ? editingService.descriptionEn : newService.descriptionEn}
+                        onChange={editingService ? handleEditServiceChange : handleNewServiceChange}
+                        required
+                      ></textarea>
+                    </div>
+                    <div className="mb-3">
+                      <label htmlFor="icon" className="form-label">{t('icon')}</label>
                       <select
                         className="form-select"
                         id="icon"
@@ -220,20 +188,15 @@ const Admin: React.FC = () => {
                         onChange={editingService ? handleEditServiceChange : handleNewServiceChange}
                         required
                       >
-                        <option value="fas fa-tools">Công cụ</option>
-                        <option value="fas fa-cogs">Bánh răng</option>
-                        <option value="fas fa-car">Xe hơi</option>
-                        <option value="fas fa-oil-can">Dầu</option>
-                        <option value="fas fa-bolt">Điện</option>
-                        <option value="fas fa-tachometer-alt">Đồng hồ</option>
-                        <option value="fas fa-car-battery">Ắc quy</option>
-                        <option value="fas fa-car-crash">Sửa chữa</option>
-                        <option value="fas fa-snowflake">Điều hòa</option>
-                        <option value="fas fa-car-side">Lốp xe</option>
+                        {iconOptions.map(option => (
+                          <option key={option.value} value={option.value}>
+                            {t(option.labelKey)}
+                          </option>
+                        ))}
                       </select>
                     </div>
                     <div className="mb-3">
-                      <label htmlFor="price" className="form-label">Giá</label>
+                      <label htmlFor="price" className="form-label">{t('price')} ({t('vietnamese')})</label>
                       <input
                         type="text"
                         className="form-control"
@@ -244,17 +207,29 @@ const Admin: React.FC = () => {
                         required
                       />
                     </div>
+                    <div className="mb-3">
+                      <label htmlFor="priceEn" className="form-label">{t('price')} ({t('english')})</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="priceEn"
+                        name="priceEn"
+                        value={editingService ? editingService.priceEn : newService.priceEn}
+                        onChange={editingService ? handleEditServiceChange : handleNewServiceChange}
+                        required
+                      />
+                    </div>
                     <div className="d-flex gap-2">
                       <button type="submit" className="btn btn-primary">
-                        {editingService ? 'Cập nhật' : 'Thêm dịch vụ'}
+                        {editingService ? t('update') : t('add')}
                       </button>
                       {editingService && (
-                        <button 
-                          type="button" 
+                        <button
+                          type="button"
                           className="btn btn-outline-secondary"
                           onClick={() => setEditingService(null)}
                         >
-                          Hủy
+                          {t('cancel')}
                         </button>
                       )}
                     </div>
@@ -262,14 +237,12 @@ const Admin: React.FC = () => {
                 </div>
               </div>
             </div>
-            
             <div className="col-lg-8">
               <div className="card border-0 shadow">
                 <div className="card-body p-4">
-                  <h3 className="card-title mb-4">Danh sách dịch vụ</h3>
-                  
+                  <h3 className="card-title mb-4">{t('service.list')}</h3>
                   {loading ? (
-                    <div className="text-center py-5">
+                    <div className="text-center py-4">
                       <div className="spinner-border text-primary" role="status">
                         <span className="visually-hidden">Loading...</span>
                       </div>
@@ -279,29 +252,27 @@ const Admin: React.FC = () => {
                       <table className="table table-hover">
                         <thead>
                           <tr>
-                            <th>ID</th>
-                            <th>Tên dịch vụ</th>
-                            <th>Icon</th>
-                            <th>Giá</th>
-                            <th>Thao tác</th>
+                            <th>{t('id')}</th>
+                            <th>{t('service.name')}</th>
+                            <th>{t('price')}</th>
+                            <th>{t('actions')}</th>
                           </tr>
                         </thead>
                         <tbody>
-                          {services.map(service => (
+                          {services.map((service) => (
                             <tr key={service.id}>
                               <td>{service.id}</td>
                               <td>{service.title}</td>
-                              <td><i className={service.icon}></i> {service.icon}</td>
                               <td>{service.price}</td>
                               <td>
                                 <div className="d-flex gap-2">
-                                  <button 
+                                  <button
                                     className="btn btn-sm btn-outline-primary"
                                     onClick={() => setEditingService(service)}
                                   >
                                     <i className="fas fa-edit"></i>
                                   </button>
-                                  <button 
+                                  <button
                                     className="btn btn-sm btn-outline-danger"
                                     onClick={() => handleDeleteService(service.id)}
                                   >
